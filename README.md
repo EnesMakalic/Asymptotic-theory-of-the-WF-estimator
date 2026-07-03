@@ -24,25 +24,44 @@ Optional name-value arguments include:
 plot_weibull_bias(niter, ...
     k_range=[0.1, 10], ...
     n_k_values=20, ...
-    sample_size=100, ...
+    sample_size=20, ...
     lambda=1, ...
     show_stderr=false)
 ```
 
 ## Arguments
-
 - niter: number of Monte Carlo replications for each value of the shape parameter.
 - k_range: range of true Weibull shape values to evaluate. Default is [0.1, 10].
 - n_k_values: number of shape values in the grid. Default is 20.
-- sample_size: sample size for each Monte Carlo replication. Default is 100.
+- sample_size: sample size for each Monte Carlo replication. Default is 20.
 - lambda: fixed Weibull scale parameter. Default is 1.
 - show_stderr: whether to display approximate standard-error bands. Default is false.
+
+## Output
+The simulation stores results in the MATLAB base workspace as:
+
+```matlab
+bias_results
+```
+
+The structure contains:
+
+- k_true: grid of true Weibull shape values;
+- bias_mml: empirical Wallace-Freeman bias;
+- bias_mle: empirical MLE bias;
+- bias_mml_analytical: analytical first-order Wallace-Freeman bias;
+- bias_mle_analytical: analytical first-order MLE bias;
+- stderr_mml: Monte Carlo standard errors for the Wallace-Freeman estimates;
+- stderr_mle: Monte Carlo standard errors for the MLE estimates;
+- niter: number of Monte Carlo replications;
+- sample_size: sample size used in each replication;
+- lambda: true Weibull scale parameter.
 
 ## Example
 To reproduce the default simulation with 100000 Monte Carlo replications:
 
 ```matlab
-[fig1, fig2] = plot_weibull_bias(1e5, sample_size=20);
+[fig1, fig2] = plot_weibull_bias(1e5);
 ```
 
 This generates two figures:
@@ -70,11 +89,11 @@ If you use this code, please cite the associated paper:
 
 ```bibtex
 @misc{Makalic2026b,
-  title = {Asymptotic Theory and Bias Correction for the {{Wallace--Freeman}} Estimator},
+  title = {Asymptotic theory and first-order bias of the {{Wallace--Freeman}} estimator},
   author = {Makalic, Enes and Schmidt, Daniel F.},
   year = 2026,
   month = apr,
-  howpublished = {https://arxiv.org/abs/2604.01568v1}
+  howpublished = {https://arxiv.org/abs/2604.01568}
 }
-
 ```
+

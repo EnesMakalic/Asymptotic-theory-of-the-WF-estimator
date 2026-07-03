@@ -1,8 +1,6 @@
 # Wallace-Freeman Estimator Bias Simulations
 
-This repository contains source code for reproducing Monte Carlo simulations and bias plots associated with the paper:
-
-Asymptotic theory and first-order bias of the Wallace-Freeman estimator
+This repository contains source code for reproducing Monte Carlo simulations and bias plots associated with the paper: "Asymptotic theory and first-order bias of the Wallace-Freeman estimator".
 
 The code compares the empirical bias of the maximum likelihood estimator (MLE) and the Wallace-Freeman estimator for the Weibull shape parameter.
 

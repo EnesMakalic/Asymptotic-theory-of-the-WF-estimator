@@ -10,7 +10,7 @@ function [fig1, fig2] = plot_weibull_bias(niter, options)
 % Optional Name-Value pairs:
 %   k_range     - [k_min, k_max] for range of k values (default: [0.1, 10])
 %   n_k_values  - number of k values to test (default: 20)
-%   sample_size - sample size for each iteration (default: 100)
+%   sample_size - sample size for each iteration (default: 20)
 %   lambda      - fixed scale parameter (default: 1)
 %   show_stderr - logical, show standard error bands (default: false)
 %
@@ -27,7 +27,7 @@ arguments
     niter (1,1) double {mustBePositive, mustBeInteger}
     options.k_range (1,2) double {mustBePositive} = [0.1, 10]
     options.n_k_values (1,1) double {mustBePositive, mustBeInteger} = 20
-    options.sample_size (1,1) double {mustBePositive, mustBeInteger} = 100
+    options.sample_size (1,1) double {mustBePositive, mustBeInteger} = 20
     options.lambda (1,1) double {mustBePositive} = 1
     options.show_stderr (1,1) logical = false
 end
@@ -290,8 +290,6 @@ end
 function [bias_mle_k, bias_mml_k] = analytical_bias_weibull(k, lambda, n)
 % ANALYTICAL_BIAS_WEIBULL Compute analytical bias formulas for Weibull distribution
 %
-% Based on equations (22) and (24) from the paper:
-% "The asymptotic bias of the Wallace-Freeman estimator"
 %
 % Inputs:
 %   k      - true shape parameter
@@ -312,11 +310,10 @@ end
 gamma_const = 0.577215664901532860606512090082;  % Euler-Mascheroni constant
 zeta3 = 1.202056903159594285399738161511;        % Riemann zeta(3)
 
-% MLE bias for k (equation 22, first component)
+% MLE bias for k 
 bias_mle_k = (18 * k * (pi^2 - 2*zeta3)) / (n * pi^4);
 
-% MML bias for k (equation 24, first component)
-% Compute the MML correction term (from equation 24)
+% MML bias for k 
 % First component of the shift vector
 correction_k = (6 / pi^2) * ((gamma_const - 1) * (lambda^2 - 1) / (lambda^2 + 1) ...
                              - (2 * k^3) / (k^2 + 1));

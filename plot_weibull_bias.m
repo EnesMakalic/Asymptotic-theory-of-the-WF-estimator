@@ -106,7 +106,7 @@ for i = 1:length(k_true)
     
     % Progress indicator
     if mod(i, max(1, floor(options.n_k_values/10))) == 0
-        fprintf('Progress: %d/%d (%.0f%%) - Elapsed: %.1f sec\n', ...
+        fprintf('Progress: %3d/%3d (%3.0f%%) - Elapsed: %.1f sec\n', ...
                 i, options.n_k_values, 100*i/options.n_k_values, toc);
     end
 end
@@ -232,6 +232,8 @@ box on;
 % =========================================================================
 % Print summary statistics
 % =========================================================================
+nanest = sum(isnan([k_mml_estimates, k_mle_estimates]),1);
+fprintf('Iterations that did NOT converge for WF / MLE: %d / %d.\n', nanest);
 fprintf('Summary Statistics:\n');
 fprintf('─────────────────────────────────────────────────────────────────\n');
 fprintf('  MLE:\n');
